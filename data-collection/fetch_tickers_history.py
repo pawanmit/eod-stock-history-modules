@@ -68,7 +68,6 @@ for ticker in  tickers:
             save_ticker_history(history)
             change_ticker_last_updated_date(ticker.ticker_id, last_business_day)
             print('History saved for ' + ticker.symbol)
-            count = count + 1
         else:
             print "No history retrieved for " + ticker.symbol
 tickerDao.commit_transaction()
