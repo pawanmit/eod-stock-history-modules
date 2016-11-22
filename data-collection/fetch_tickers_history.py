@@ -58,7 +58,6 @@ last_business_day = str(date_time_util.get_last_business_day())
 print 'last_business_day:' + last_business_day
 tickers = get_tickers_for_updating(last_business_day)
 print(str(len(tickers)) + " retrieved")
-count = 0
 for ticker in  tickers:
     number_of_missing_history_days = get_number_of_missing_history_days(ticker, last_business_day)
     if number_of_missing_history_days != 0:
@@ -70,7 +69,6 @@ for ticker in  tickers:
             change_ticker_last_updated_date(ticker.ticker_id, last_business_day)
             print('History saved for ' + ticker.symbol)
             count = count + 1
-            if count > 5: break 
         else:
             print "No history retrieved for " + ticker.symbol
 tickerDao.commit_transaction()
