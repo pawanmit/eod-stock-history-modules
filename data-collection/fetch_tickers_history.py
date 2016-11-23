@@ -49,7 +49,7 @@ def change_ticker_last_updated_date(ticker_id, last_updated_date):
 
 def get_number_of_missing_history_days(ticker, last_business_day):
     if ticker.last_update_date is None:
-        return 5
+        return 2
     num_days_of_eod_data_missing = date_time_util.get_num_business_days_between(ticker.last_update_date, last_business_day)
     return num_days_of_eod_data_missing
     
