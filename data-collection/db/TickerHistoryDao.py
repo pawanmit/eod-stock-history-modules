@@ -19,17 +19,24 @@ class TickerHistoryDao:
                 print e
                 print "Error saving ticker history for " + tickerHistory.symbol
 
-    def get_latest_ticker_history(self, symbol, num_rows):
-        formattedSql = "SELECT * FROM ticker_history WHERE symbol = '{0}' ORDER BY date DESC LIMIT '{1}'";
-        vars = (symbol, num_rows)
+    def get_latest_ticker_history(self, symbol, exchange, num_rows):
+        formattedSql = "SELECT * FROM ticker_history WHERE symbol = '{0}' AND exchange = '{1}' ORDER BY date DESC LIMIT '{2}'";
+        vars = (symbol, exchange, num_rows)
         query = formattedSql.format(*vars)
         cursor = self.baseDao.execute(query)
         history = []
         for row in cursor:
             ticker_history = self.get_ticker_history_from_row(row)
             history.append(ticker_history)
-        return history   
+        return history
+    
+    def update_percent_change(self, ticker_history_id, percent_change):
+        formattedSql = 'UPDATE ticker_history SET percent_change="{0}" WHERE ticker_history_id="{1}"'
+        vars = (percent_change, ticker_history_id)
+        query = formattedSql.format(*vars)
+        self.baseDao.execute(query)
         
+
     def get_ticker_history_from_row(self, ticker_history_row):
         ticker_history = TickerHistory()
         ticker_history.id = ticker_history_row[0]

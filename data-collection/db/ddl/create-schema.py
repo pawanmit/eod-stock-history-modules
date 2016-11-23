@@ -35,9 +35,10 @@ c.execute('''CREATE TABLE ticker
                 )'''
         )
 
-
+print "Creating indexes..."
 c.execute('''CREATE INDEX ticker_history_index_1 ON ticker_history(symbol, exchange);''')
 c.execute('''CREATE UNIQUE INDEX ticker_history_index_2 ON ticker_history(symbol, exchange, date);''')
+print "Indexes Created..."
 
 
 conn.commit()
