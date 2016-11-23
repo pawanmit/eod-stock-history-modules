@@ -28,10 +28,11 @@ def get_ticker_from_row(ticker_row):
 
 def save_tickers(tickers):
     tickerDao = TickerDao()
-    tickerDao.insertTickers(tickers)
+    tickerDao.delete_all_tickers()
+    tickerDao.insert_tickers(tickers)
 
 last_business_day = str(date_time_util.get_last_business_day())
 print "Fetching tickers active on "  + last_business_day
-    
+
 tickers =   get_active_tickers(last_business_day) 
 save_tickers(tickers)

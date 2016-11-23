@@ -41,8 +41,8 @@ def convertJsonToHistory(ticker, data):
         history.append(tickerHistory)
     return history
 
-def save_ticker_history(tickerHistor):
-    tickerHistoryDao.insertTickerHistory(tickerHistor)
+def save_ticker_history(tickerHistory):
+    tickerHistoryDao.insertTickerHistory(tickerHistory)
     
 def change_ticker_last_updated_date(ticker_id, last_updated_date):
     tickerDao.update_ticker_last_update_date(ticker_id, last_updated_date)
@@ -66,7 +66,7 @@ for ticker in  tickers:
             print(str(len(history)) + " retrieved for " + ticker.symbol)
             #change last_updated_date of ticker to last_business_day
             save_ticker_history(history)
-            change_ticker_last_updated_date(ticker.ticker_id, last_business_day)
+            #change_ticker_last_updated_date(ticker.ticker_id, last_business_day)
             print('History saved for ' + ticker.symbol)
         else:
             print "No history retrieved for " + ticker.symbol

@@ -13,7 +13,7 @@ print "Creating schema for stocks.db......"
 # Create table
 c.execute('''CREATE TABLE ticker_history
             (
-            ticker_eod_history_id integer primary key autoincrement,
+            ticker_history_id integer primary key autoincrement,
             symbol text not null,
             name text not null,
             date text not null, 
@@ -34,6 +34,11 @@ c.execute('''CREATE TABLE ticker
                 unique (symbol, exchange)
                 )'''
         )
+
+
+c.execute('''CREATE UNIQUE INDEX ticker_history_index_1 ON ticker_history(symbol, exchange);''')
+c.execute('''CREATE UNIQUE INDEX ticker_history_index_2 ON ticker_history(symbol, exchange, date);''')
+
 
 conn.commit()
 conn.close()

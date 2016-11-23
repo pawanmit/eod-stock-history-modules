@@ -1,5 +1,5 @@
 class TickerHistory:
-
+    id = None
     symbol = None
     date = None
     name = None

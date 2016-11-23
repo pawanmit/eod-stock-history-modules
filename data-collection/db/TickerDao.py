@@ -6,7 +6,7 @@ class TickerDao:
     def __init__(self):
         self.baseDao = BaseDao()
     
-    def insertTickers(self, tickers):
+    def insert_tickers(self, tickers):
         count = 0
         formattedSql = 'INSERT INTO ticker(symbol, name, exchange) VALUES ("{0}","{1}","{2}")'
         for ticker in tickers:
@@ -30,10 +30,13 @@ class TickerDao:
         for row in cursor:
             ticker_entity = self.get_ticker_entity_from_row(row)
             tickers.append(ticker_entity)
-        self.baseDao.commit() 
         #print str(len(tickers)) + " tickers retrieved from ticker table"
         return tickers
-           
+    
+    def delete_all_tickers(self):
+        query = 'DELETE FROM ticker'
+        cursor = self.baseDao.execute(query)
+        
     def get_ticker_entity_from_row(self, ticker_row):
         symbol = ticker_row[1]
         name = ticker_row[2]
