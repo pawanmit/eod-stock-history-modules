@@ -36,7 +36,7 @@ c.execute('''CREATE TABLE ticker
         )
 
 
-c.execute('''CREATE UNIQUE INDEX ticker_history_index_1 ON ticker_history(symbol, exchange);''')
+c.execute('''CREATE INDEX ticker_history_index_1 ON ticker_history(symbol, exchange);''')
 c.execute('''CREATE UNIQUE INDEX ticker_history_index_2 ON ticker_history(symbol, exchange, date);''')
 
 
