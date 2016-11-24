@@ -3,6 +3,7 @@ import os
 dir_path = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(dir_path + '/quandl')
 sys.path.append(dir_path + '/../db')
+sys.path.append(dir_path + '/..')
 import rest_client
 import date_time_util
 from Ticker import Ticker

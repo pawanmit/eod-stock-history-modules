@@ -1,3 +1,4 @@
+import json
 class TickerHistory:
     id = None
     symbol = None
@@ -9,3 +10,7 @@ class TickerHistory:
     close = None
     volume = None
     exchange = None
+    
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)    

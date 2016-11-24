@@ -36,6 +36,18 @@ class TickerHistoryDao:
         query = formattedSql.format(*vars)
         self.baseDao.execute(query)
         
+     
+    def get_ticker_history_ordered_by_column(self, exchange, date, column_name, order, num_rows):
+        formattedSql = "SELECT * FROM ticker_history WHERE exchange = '{0}' AND date = '{1}' ORDER BY {2} {3} LIMIT {4}";
+        vars = (exchange, date, column_name, order, num_rows)
+        query = formattedSql.format(*vars)
+        cursor = self.baseDao.execute(query)
+        history = []
+        for row in cursor:
+            ticker_history = self.get_ticker_history_from_row(row)
+            history.append(ticker_history)
+        return history
+         
 
     def get_ticker_history_from_row(self, ticker_history_row):
         ticker_history = TickerHistory()
